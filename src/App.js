@@ -1,5 +1,6 @@
 
 
+import Weather from './Weather';
 import React from 'react';
 import axios from 'axios';
     
@@ -12,7 +13,10 @@ class App extends React.Component{
       searchCity:'',
       showData:false,
       cityData:{},
-      link:'x'
+      link:'x',
+      // apiLink:'x',
+      resultDataAPI:[],
+      testArray:[]
     }
   }
 
@@ -25,23 +29,55 @@ class App extends React.Component{
     })
     
     let locURL = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.searchCity}&format=json`;
-   
     
     let resultData = await axios.get(locURL);
+    
     console.log('img uuuuuuuurrrrrrrrrl',this.state.link);
     await this.setState({
       cityData: resultData.data[0],
       showData: true,
     })
+    
     await this.setState({
       link:`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=18` 
-
+      
     })
+    
+     let apiLink= `${process.env.REACT_APP_SERVER_LINK}/weather?searchQuery=${this.state.searchCity}`
+     console.log(apiLink);
+     console.log('axios',await axios.get(apiLink));
+
+    let apiData=await axios.get(apiLink)
+    console.log('apiData',apiData.data);
+/////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+    await this.setState({        
+     
+      testArray: apiData.data
+    })
+
+    console.log(this.state.testArray);
+    // console.log('resultDAtaapi',this.state.resultDataAPI);
+    
       
     
-    console.log(this.state.cityData.lat);
-    console.log(process.env.REACT_APP_LOCATIONIQ_KEY);
-console.log('img uuuuuuuurrrrrrrrrl',this.state.link);
+//     console.log(this.state.cityData.lat);
+//     console.log(process.env.REACT_APP_LOCATIONIQ_KEY);
+// console.log('img uuuuuuuurrrrrrrrrl',this.state.link);
+
+
+
+
+
   }
 
   render(){
@@ -61,6 +97,8 @@ console.log('img uuuuuuuurrrrrrrrrl',this.state.link);
           {this.state.showData &&
           <img src={this.state.link} alt='map image' />}
           {/* <img src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg' alt='' /> */}
+
+          <Weather resultDataAPI={this.state.testArray}/>
       </>
       </div>
     )
