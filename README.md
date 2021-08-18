@@ -22,6 +22,7 @@ this application is built using react.
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 15-08-2021 11:30pm - Application now can provide altitude and longitude of explored area.
 16-08-2021 03:00am - Application now shows a street map of the expolored area.
+18-08-2021 11:00am - render cards of movies 
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
@@ -47,5 +48,15 @@ Start time: 2 am
 Finish time: 3 am
 
 Actual time needed to complete: 1 hour
+
+
+Name of feature: render cards of movies 
+
+Estimate of time needed to complete: 3 hour
+
+Start time: 8 am
+Finish time: 11 am
+
+Actual time needed to complete: 3 hours
 
 
